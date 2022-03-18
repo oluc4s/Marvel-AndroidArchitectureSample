@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.s2start.marvel.R
 import com.s2start.marvel.databinding.CharactersFragmentBinding
@@ -38,6 +40,7 @@ class CharactersFragment : Fragment() , CharactersAdapter.CharacterItemListener{
         adapter = CharactersAdapter(this)
         binding.charactersRv.layoutManager = LinearLayoutManager(requireContext())
         binding.charactersRv.adapter = adapter
+
     }
 
     private fun setupObservers() {
@@ -45,7 +48,8 @@ class CharactersFragment : Fragment() , CharactersAdapter.CharacterItemListener{
             when (it.status){
                 Resource.Status.SUCCESS -> {
                     binding.progressBar.visibility = View.GONE
-                    if (!it.data.isNullOrEmpty()) adapter.setItems(ArrayList(it.data))
+                    if (!it.data.isNullOrEmpty())
+                        adapter.setItems(ArrayList(it.data))
                 }
                 Resource.Status.ERROR -> println("#DEVMATHEUS ERROR  ${it.message}")
                 Resource.Status.LOADING -> binding.progressBar.visibility = View.VISIBLE
@@ -55,7 +59,10 @@ class CharactersFragment : Fragment() , CharactersAdapter.CharacterItemListener{
         })
     }
 
-    override fun onClickedCharacter(characterId: Int) {
-        TODO("Not yet implemented")
+    override fun onClickedCharacter(id: Int) {
+        findNavController().navigate(
+            R.id.action_charactersFragment_to_characterDetailFragment,
+            bundleOf("id" to id)
+        )
     }
 }

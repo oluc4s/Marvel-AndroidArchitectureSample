@@ -8,6 +8,15 @@
     <fragment
         android:id="@+id/charactersFragment"
         android:name="com.s2start.marvel.ui.characters.CharactersFragment"
-        android:label="characters_fragment"
-        tools:layout="@layout/characters_fragment" />
+        android:label="Marvel"
+        tools:layout="@layout/characters_fragment" >
+        <action
+            android:id="@+id/action_charactersFragment_to_characterDetailFragment"
+            app:destination="@id/characterDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/characterDetailFragment"
+        android:name="com.s2start.marvel.ui.characterdetail.CharacterDetailFragment"
+        android:label="Detail"
+        tools:layout="@layout/character_detail_fragment" />
 </navigation>
