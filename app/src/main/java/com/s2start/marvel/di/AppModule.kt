@@ -28,7 +28,6 @@ object AppModule {
         .baseUrl("http://gateway.marvel.com/v1/public/")
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
-        .also { println( "#DEVMATHEUS ${it.baseUrl()}") }
 
     @Provides
     fun provideGson(): Gson = GsonBuilder().create()
